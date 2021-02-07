@@ -15,7 +15,8 @@
             background-size: cover;
             height: 100vh;
         }
-        .text-style{
+
+        .text-style {
             text-shadow: 2px 2px 7px black;
         }
     </style>
@@ -44,9 +45,11 @@
         const searchBtn = document.getElementById("search-btn").addEventListener("click", function () {
             const cityInput = document.getElementById("city-name-input").value;
             weatherBalloon(cityInput);
+
+            document.getElementById("city-name-input").value = "";
         })
         function weatherBalloon(cityName) {
-            const key = 'your key';
+            const key = 'Your key';
             fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + key)
                 .then(resp => resp.json())
                 .then(data => {
@@ -55,9 +58,9 @@
                     document.getElementById("weather-description").innerText = data.weather[0].main;
                 })
                 .catch(error => {
-                    document.getElementById("city-name").innerText = "Undefined City";
+                    document.getElementById("city-name").innerText = "Bad server request or City not found";
                     document.getElementById("temperature-result").innerText = "Null";
-                    document.getElementById("weather-description").innerText = "Null";
+                    document.getElementById("weather-description").innerText = "____";
                 })
         }
     </script>
